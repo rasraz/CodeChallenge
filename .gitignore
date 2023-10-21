@@ -1,0 +1,9 @@
+.vscode
+db.sqlite3
+*/TODO_*.txt
+TODO_*.txt
+media
+*/pycache/
+*/migrations/pycache/
+*/__pycache__/
+*/migrations/__pycache__/
