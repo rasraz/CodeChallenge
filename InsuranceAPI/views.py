@@ -2,8 +2,9 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-import json
 from .serializers import RiskCalculationSerializer
+import json
+from datetime import datetime
 
 # View API registration and calculation of user insurance risk
 class RiskCalculationView(APIView):
@@ -11,8 +12,8 @@ class RiskCalculationView(APIView):
     def calculation(self,validated_data):
         risk_questions=sum(validated_data.get('risk_questions'))
         income=int(validated_data.get('income'))
-        vehicle = data.get('vehicle', {}).get('year', None)
-        house = data.get('house', {}).get('ownership_status', None)
+        vehicle = validated_data.get('vehicle', {}).get('year', None)
+        house = validated_data.get('house', {}).get('ownership_status', None)
         age=int(validated_data.get('age'))
         marital_status=validated_data.get('marital_status')
         scores={
@@ -56,7 +57,7 @@ class RiskCalculationView(APIView):
     # Post API to receive information sent by the user
     def post(self,request):
         serialized_data=RiskCalculationSerializer(data=request.data)
-        print(json.loads(request.data['risk_questions']))
+        print(request)
         if serialized_data.is_valid():
             # serialized_data.save()
             data_calculated=self.calculation(validated_data=serialized_data.data)
