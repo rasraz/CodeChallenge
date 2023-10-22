@@ -8,8 +8,8 @@ class RiskCalculationSerializer(serializers.Serializer):
     income = serializers.IntegerField()
     marital_status = serializers.ChoiceField(choices=["married", "Single"])
     risk_questions = serializers.ListField(child=serializers.IntegerField())
-    vehicle = serializers.DictField(child=serializers.IntegerField(),allow_empty=True,required=False)
-    house = serializers.DictField(child=serializers.ChoiceField(choices=["owned", "mortgage"]),allow_empty=True,required=False)
+    vehicle = serializers.DictField(child=serializers.IntegerField(),allow_null=True,required=False)
+    house = serializers.DictField(child=serializers.ChoiceField(choices=["owned", "mortgage"]),allow_null=True,required=False)
 
 
 
